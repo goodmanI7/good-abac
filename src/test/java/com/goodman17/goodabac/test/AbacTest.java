@@ -12,6 +12,7 @@ public class AbacTest {
     @Test
     public void testEval() {
         Enforcer e = new Enforcer("examples/abac_rule_model.conf");
-//        e.addPolicy()
+        System.out.println("111");
+        e.addPolicy()
     }
 }
