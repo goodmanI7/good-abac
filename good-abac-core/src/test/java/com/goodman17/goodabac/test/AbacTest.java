@@ -22,13 +22,14 @@ public class AbacTest {
         Env env = createEnv();
         Statement statement = createStatement();
         long start = System.currentTimeMillis();
-        AbacEnforcer enforcer = new AbacEnforcer("../examples/abac_rule_model.conf");
-        enforcer.addStatement(statement);
-        boolean result = enforcer.enforce(subject, resource, "order:update", env);
-        System.out.println("result: " + result);
+        for (int i = 0; i < 1; i++) {
+            AbacEnforcer enforcer = new AbacEnforcer("../examples/abac_rule_model.conf");
+            enforcer.addStatement(statement);
+            boolean result = enforcer.enforce(subject, resource, "order:update", env);
+            System.out.println(i + " result: " + result);
+        }
         long end = System.currentTimeMillis();
         System.out.println("time: " + (end - start));
-
     }
 
     private Statement createStatement() {
