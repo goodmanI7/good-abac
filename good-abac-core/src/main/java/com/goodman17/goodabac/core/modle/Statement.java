@@ -3,6 +3,8 @@ package com.goodman17.goodabac.core.modle;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * ABAC权限策略声明类
  * 表示特定主体对特定资源可执行的操作及其效果
@@ -46,6 +48,15 @@ public class Statement {
     }
 
     /**
+     * 获取操作列表的JSON字符串表示
+     * 
+     * @return 操作列表的JSON字符串
+     */
+    public String getActionAsJson() {
+        return JSON.toJSONString(action);
+    }
+
+    /**
      * 设置允许或拒绝的操作列表
      * 
      * @param action 操作列表
@@ -73,10 +84,14 @@ public class Statement {
     }
 
     /**
-     * 设置操作适用的资源列表
+     * 获取资源列表的JSON字符串表示
      * 
-     * @param resource 资源列表
+     * @return 资源列表的JSON字符串
      */
+    public String getResourceAsJson() {
+        return JSON.toJSONString(resource);
+    }
+
     public void setResource(List<String> resource) {
         this.resource = resource;
     }

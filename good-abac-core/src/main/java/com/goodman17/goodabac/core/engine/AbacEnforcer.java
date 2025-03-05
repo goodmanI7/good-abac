@@ -32,12 +32,7 @@ public class AbacEnforcer extends Enforcer {
      * @param statement 策略对象
      */
     public void addStatement(Statement statement) {
-        String effect = statement.getEffect();
-        String condition = statement.getCondition().toJson();
-        for (String action : statement.getAction()) {
-            for (String resource : statement.getResource()) {
-                this.addPolicy(action, resource, condition, effect);
-            }
-        }
+        this.addPolicy(statement.getActionAsJson(), statement.getResourceAsJson(), statement.getCondition().toJson(),
+                statement.getEffect());
     }
 }
