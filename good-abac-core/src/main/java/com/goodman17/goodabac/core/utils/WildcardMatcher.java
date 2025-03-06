@@ -58,6 +58,11 @@ public class WildcardMatcher {
             return false;
         }
 
+        // 先执行下全量匹配
+        if (pattern.equals(str)) {
+            return true;
+        }
+
         // 尝试从缓存获取已编译的模式
         Pattern compiledPattern = getCompiledPattern(pattern);
 

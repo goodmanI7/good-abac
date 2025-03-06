@@ -22,7 +22,7 @@ public class AbacTest {
         Env env = createEnv();
         Statement statement = createStatement();
         long start = System.currentTimeMillis();
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < 100; i++) {
             AbacEnforcer enforcer = new AbacEnforcer("../examples/abac_rule_model.conf");
             enforcer.addStatement(statement);
             boolean result = enforcer.enforce(subject, resource, "order:update", env);
@@ -36,7 +36,7 @@ public class AbacTest {
         Statement statement = new Statement();
         statement.addAction("order:create");
         statement.addAction("order:update");
-        statement.addResource("order:*");
+        statement.addResource("*");
         statement.setEffect("allow");
         Condition condition = new Condition();
         statement.setCondition(condition);

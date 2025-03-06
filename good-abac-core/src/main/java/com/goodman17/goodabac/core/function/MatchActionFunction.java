@@ -51,26 +51,26 @@ public class MatchActionFunction extends AbstractFunction {
         // 验证输入参数
         if (policyActionList.isEmpty()) {
             // 策略动作列表为空，不允许任何动作
-            LOGGER.debug("策略动作列表为空，拒绝访问");
+            LOGGER.info("策略动作列表为空，拒绝访问");
             return AviatorBoolean.FALSE;
         }
 
         if (requestActionStr == null || requestActionStr.isEmpty()) {
             // 请求动作为空，不允许访问
-            LOGGER.debug("请求动作为空，拒绝访问");
+            LOGGER.info("请求动作为空，拒绝访问");
             return AviatorBoolean.FALSE;
         }
 
         // 遍历策略动作列表，检查是否有匹配的动作
         for (String action : policyActionList) {
             if (WildcardMatcher.isMatch(action, requestActionStr)) {
-                LOGGER.debug("动作匹配成功: 策略动作 [{}] 匹配请求动作 [{}]", action, requestActionStr);
+                LOGGER.info("动作匹配成功: 策略动作 [{}] 匹配请求动作 [{}]", action, requestActionStr);
                 return AviatorBoolean.TRUE;
             }
         }
 
         // 没有找到匹配的动作
-        LOGGER.debug("动作匹配失败: 请求动作 [{}] 不在允许列表中", requestActionStr);
+        LOGGER.info("动作匹配失败: 请求动作 [{}] 不在允许列表中", requestActionStr);
         return AviatorBoolean.FALSE;
     }
 

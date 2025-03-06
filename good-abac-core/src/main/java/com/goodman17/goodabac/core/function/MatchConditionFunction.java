@@ -23,7 +23,6 @@ public class MatchConditionFunction extends AbstractFunction {
         Subject subject = (Subject) requestSubject.getValue(context);
         Resource resource = (Resource) requestResource.getValue(context);
         Env env = (Env) requestEnv.getValue(context);
-        System.out.println(env);
         return AviatorBoolean.valueOf(true);
     }
 }
