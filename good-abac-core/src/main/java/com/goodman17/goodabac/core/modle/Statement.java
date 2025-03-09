@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.alibaba.fastjson.JSON;
+import com.goodman17.goodabac.core.modle.enums.Effect;
 
 /**
  * ABAC权限策略声明类
@@ -24,18 +25,18 @@ public class Statement {
     /**
      * 策略效果，通常为"allow"或"deny"
      */
-    private String effect;
+    private Effect effect;
 
     /**
      * 条件表达式
      */
-    private Condition condition;
+    private List<Condition> conditions;
 
     public Statement() {
         this.action = new ArrayList<>();
         this.resource = new ArrayList<>();
-        this.effect = "allow";
-        this.condition = new Condition();
+        this.effect = Effect.ALLOW;
+        this.conditions = new ArrayList<>();
     }
 
     /**
@@ -110,7 +111,7 @@ public class Statement {
      * 
      * @return 策略效果，通常为"allow"或"deny"
      */
-    public String getEffect() {
+    public Effect getEffect() {
         return effect;
     }
 
@@ -119,7 +120,7 @@ public class Statement {
      * 
      * @param effect 策略效果，通常为"allow"或"deny"
      */
-    public void setEffect(String effect) {
+    public void setEffect(Effect effect) {
         this.effect = effect;
     }
 
@@ -128,16 +129,25 @@ public class Statement {
      * 
      * @return 条件表达式
      */
-    public Condition getCondition() {
-        return condition;
+    public List<Condition> getConditions() {
+        return conditions;
     }
 
     /**
      * 设置条件表达式
      * 
-     * @param condition 条件表达式
+     * @param conditions 条件表达式
      */
-    public void setCondition(Condition condition) {
-        this.condition = condition;
+    public void setConditions(List<Condition> conditions) {
+        this.conditions = conditions;
+    }
+
+    /**
+     * 添加一个条件
+     * 
+     * @param condition 条件
+     */
+    public void addCondition(Condition condition) {
+        this.conditions.add(condition);
     }
 }

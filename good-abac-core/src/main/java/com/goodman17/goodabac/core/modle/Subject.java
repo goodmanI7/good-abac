@@ -74,7 +74,22 @@ public class Subject {
         this.attrs = attrs;
     }
 
+    /**
+     * 添加一个属性
+     * 
+     * @param key   属性键
+     * @param value 属性值
+     */
     public void addAttr(String key, String value) {
         this.attrs.put(key, value);
+    }
+
+    /**
+     * 判断当前主体是否为管理员
+     * 
+     * @return 如果当前主体具有管理员角色，则返回true，否则返回false
+     */
+    public boolean isAdmin() {
+        return false;
     }
 }
