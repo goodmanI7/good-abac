@@ -1,5 +1,8 @@
 package com.goodman17.goodabac.core.modle;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 权限校验上下文类
  * 包含授权决策所需的三个主要组件：主体、资源和环境
@@ -23,6 +26,11 @@ public class EnforceContext {
     private final Env env;
 
     /**
+     * 上下文属性
+     */
+    private final Map<String, Object> attributes;
+
+    /**
      * 构造一个完整的权限校验上下文
      * 
      * @param subject  访问主体
@@ -33,6 +41,15 @@ public class EnforceContext {
         this.subject = subject;
         this.resource = resource;
         this.env = env;
+        this.attributes = new HashMap<>();
+        buildAttributes();
+    }
+
+    private void buildAttributes() {
+        attributes.clear();
+        attributes.put("sub", subject);
+        attributes.put("res", resource);
+        attributes.put("env", env);
     }
 
     /**
@@ -60,5 +77,14 @@ public class EnforceContext {
      */
     public Env getEnv() {
         return env;
+    }
+
+    /**
+     * 获取上下文属性
+     * 
+     * @return 上下文属性
+     */
+    public Map<String, Object> getAttributes() {
+        return attributes;
     }
 }

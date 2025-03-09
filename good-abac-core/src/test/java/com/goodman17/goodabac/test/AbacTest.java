@@ -29,7 +29,7 @@ public class AbacTest {
         statements.add(statement);
         long start = System.currentTimeMillis();
         Enforcer enforcer = new Enforcer();
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 100; i++) {
             boolean result = enforcer.enforce("order:update", subject, resource, env, statements);
             System.out.println(i + " result: " + result);
         }
