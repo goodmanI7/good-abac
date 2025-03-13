@@ -1,10 +1,9 @@
 package com.goodman17.goodabac.core.engine;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
-import com.goodman17.goodabac.core.handler.AviatorConditionHandler;
 import com.goodman17.goodabac.core.handler.ConditionHandler;
 import com.goodman17.goodabac.core.modle.Condition;
 import com.goodman17.goodabac.core.modle.EnforceContext;
@@ -36,14 +35,16 @@ import com.goodman17.goodabac.core.utils.ActioMatcher;
  */
 public class Enforcer {
 
+    /**
+     * 条件处理器
+     */
     private final Map<String, ConditionHandler> conditionHandlers;
 
     /**
      * 创建一个新的Enforcer实例
      */
     public Enforcer() {
-        this.conditionHandlers = new HashMap<>();
-        registerConditionHandler(new AviatorConditionHandler());
+        this.conditionHandlers = new ConcurrentHashMap<>();
     }
 
     /**
@@ -95,6 +96,16 @@ public class Enforcer {
         return anyAllowed;
     }
 
+    /**
+     * 注册条件处理器
+     * 
+     * <p>
+     * 将指定的条件处理器注册到强制执行器中，使其能够处理特定类型的条件判断。
+     * 条件处理器根据其类型被存储在内部映射中，当遇到相应类型的条件时会被调用。
+     * </p>
+     * 
+     * @param conditionHandler 要注册的条件处理器实例
+     */
     public void registerConditionHandler(ConditionHandler conditionHandler) {
         conditionHandlers.put(conditionHandler.type(), conditionHandler);
     }
