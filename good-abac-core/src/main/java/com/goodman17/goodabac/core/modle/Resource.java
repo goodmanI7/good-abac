@@ -84,4 +84,22 @@ public class Resource {
     public void addAttr(String key, String value) {
         this.attrs.put(key, value);
     }
+
+    /**
+     * 获取用于权限执行的资源属性集合
+     * 该方法将资源ID和所有资源属性转换为标准格式，
+     * 通过添加"res."前缀使其在权限评估过程中可以被识别为资源属性。
+     * 
+     * @return 包含前缀化资源属性的Map集合，键格式为"res.属性名"
+     */
+    public Map<String, String> getEnforceAttrs() {
+        Map<String, String> enforceAttrs = new HashMap<>();
+        enforceAttrs.put("res.id", id);
+        if (attrs != null && !attrs.isEmpty()) {
+            attrs.forEach((key, value) -> {
+                enforceAttrs.put("res." + key, value);
+            });
+        }
+        return enforceAttrs;
+    }
 }

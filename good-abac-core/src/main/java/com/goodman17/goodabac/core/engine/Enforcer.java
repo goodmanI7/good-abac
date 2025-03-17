@@ -12,7 +12,7 @@ import com.goodman17.goodabac.core.modle.Resource;
 import com.goodman17.goodabac.core.modle.Statement;
 import com.goodman17.goodabac.core.modle.Subject;
 import com.goodman17.goodabac.core.modle.enums.Effect;
-import com.goodman17.goodabac.core.utils.ActioMatcher;
+import com.goodman17.goodabac.core.utils.ActionMatcher;
 
 /**
  * 基于属性的访问控制(ABAC)强制执行器
@@ -71,7 +71,7 @@ public class Enforcer {
                 continue;
             }
             // 如果操作列表中没有匹配的操作，则跳过
-            if (!statement.getAction().stream().filter(act -> ActioMatcher.match(action, act)).findFirst()
+            if (!statement.getAction().stream().filter(act -> ActionMatcher.match(action, act)).findFirst()
                     .isPresent()) {
                 continue;
             }
@@ -118,6 +118,10 @@ public class Enforcer {
      * @return 如果条件满足或为空返回true，否则返回false
      */
     private boolean fireCondition(EnforceContext context, List<Condition> conditions) {
+        if (conditions == null || conditions.isEmpty()) {
+            return true;
+        }
+
         boolean isAnyAllowed = false;
         for (Condition condition : conditions) {
             ConditionHandler conditionHandler = conditionHandlers.get(condition.getType());

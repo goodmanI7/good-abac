@@ -1,6 +1,6 @@
 package com.goodman17.goodabac.core.utils;
 
-public class ActioMatcher {
+public class ActionMatcher {
 
     /**
      * 匹配操作与模式

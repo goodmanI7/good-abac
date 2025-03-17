@@ -49,4 +49,21 @@ public class Env {
     public void addAttr(String key, String value) {
         this.attrs.put(key, value);
     }
+
+    /**
+     * 获取用于执行访问控制的环境属性
+     * 该方法返回一个新的Map，其中包含所有环境属性，但每个键都添加了"env."前缀，
+     * 以便在访问控制执行期间明确标识这些属性来自环境上下文。
+     * 
+     * @return 带有"env."前缀的环境属性映射
+     */
+    public Map<String, String> getEnforceAttrs() {
+        Map<String, String> enforceAttrs = new HashMap<>();
+        if (attrs != null && !attrs.isEmpty()) {
+            attrs.forEach((key, value) -> {
+                enforceAttrs.put("env." + key, value);
+            });
+        }
+        return enforceAttrs;
+    }
 }

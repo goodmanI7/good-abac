@@ -47,9 +47,10 @@ public class EnforceContext {
 
     private void buildAttributes() {
         attributes.clear();
-        attributes.put("sub", subject);
-        attributes.put("res", resource);
-        attributes.put("env", env);
+        // 将subject、resource和env的属性合并到attributes中
+        attributes.putAll(subject.getEnforceAttrs());
+        attributes.putAll(resource.getEnforceAttrs());
+        attributes.putAll(env.getEnforceAttrs());
     }
 
     /**

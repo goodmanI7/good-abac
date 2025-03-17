@@ -92,4 +92,24 @@ public class Subject {
     public boolean isAdmin() {
         return false;
     }
+
+    /**
+     * 获取用于权限执行的属性集合
+     * 
+     * 该方法返回一个格式化后的属性Map，专门用于权限强制执行。
+     * 它会将主体ID添加为"sub.id"，并将所有主体属性转换为"sub.{属性名}"格式。
+     * 这种格式有助于在策略评估过程中清晰区分主体属性。
+     * 
+     * @return 返回包含格式化主体属性的Map，键以"sub."为前缀
+     */
+    public Map<String, String> getEnforceAttrs() {
+        Map<String, String> enforceAttrs = new HashMap<>();
+        enforceAttrs.put("sub.id", id);
+        if (this.attrs != null && !this.attrs.isEmpty()) {
+            this.attrs.forEach((key, value) -> {
+                enforceAttrs.put("sub." + key, value);
+            });
+        }
+        return enforceAttrs;
+    }
 }
